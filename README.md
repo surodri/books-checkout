@@ -1,7 +1,7 @@
 
-##Run user service 
+## Run user service 
 
-###Local 
+### Local 
 ```$ cd user-domain-service
    $ flask run
 
@@ -9,14 +9,15 @@
     http://localhost:5000/user/?username=user&password=s3curePass&book=Linux
 ```
 
-###Docker container 
+### Docker container 
 
-```$ docker build -t app_service:latest .
+```
+   $ docker build -t app_service:latest .
 
    $ docker  run -it  -p 8000:5000 app_service:latest /bin/sh
 ```
 
-##Run book service 
+## Run book service 
 
 ``` $ cd book-domain-service
     $ flask run
