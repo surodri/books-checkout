@@ -15,7 +15,7 @@ RUN pip3 install gunicorn
 RUN pip3 install pipenv
 
 # -- Install dependencies:
-RUN set -ex && pipenv install
+RUN pipenv install 
 
 ENV FLASK_APP app_service.py
 
