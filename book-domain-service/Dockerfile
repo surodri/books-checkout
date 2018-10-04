@@ -1,23 +1,14 @@
-FROM python:3.6-alpine
+FROM python:3.7-alpine
 
-RUN adduser -D microblog
+COPY . /app
+WORKDIR /app
+RUN chmod a+x boot.sh
 
-WORKDIR /home/microblog
+COPY Pipfile Pipfile
+COPY Pipfile.lock Pipfile.lock
 
-COPY requirements.txt requirements.txt
-RUN python -m venv venv
-RUN venv/bin/pip install -r requirements.txt
-RUN venv/bin/pip install gunicorn
-
-COPY app app
-COPY migrations migrations
-COPY microblog.py config.py boot.sh ./
-RUN chmod +x boot.sh
-
-ENV FLASK_APP microblog.py
-
-RUN chown -R microblog:microblog ./
-USER microblog
+RUN pip3 install pipenv
+RUN pipenv install --system --deploy --ignore-pipfile
 
 EXPOSE 5000
 ENTRYPOINT ["./boot.sh"]
