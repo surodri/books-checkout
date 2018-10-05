@@ -6,6 +6,9 @@ name = "pypi"
 [packages]
 flask = "==1.0.2"
 gunicorn = "==19.9.0"
+pytest = "*"
+flask-sqlalchemy = "*"
+flask-migrate = "*"
 
 [dev-packages]
 
