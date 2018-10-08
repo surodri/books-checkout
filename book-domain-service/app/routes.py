@@ -5,10 +5,10 @@ from app.book import Book
 @app.route('/<int:id>/checkout', methods=['PUT'])
 def checkout(id):
 
-    bookTitle = Book.query.get(id).title
+    book = Book.query.get(id)
 
-    if(bookTitle):
-        return Response("You checked out book id: " + str(id) + " name: " +
-        str(bookTitle), 200)
+    if(book):
+        bookTitle = book.title
+        return Response(f"You checked out book id: {id}, name: {bookTitle}", 200)
     else:
         return Response("I wish we had that book! Try another", 404)
