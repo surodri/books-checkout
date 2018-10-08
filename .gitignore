@@ -1,0 +1,3 @@
+book-domain-service/app/*.pyc
+user-domain-service/app/*.pyc
+user-domain-service/deactivate/
