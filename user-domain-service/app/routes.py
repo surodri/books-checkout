@@ -11,9 +11,8 @@ def index():
     book = request.args.get('book')
 
     if(password == "s3curePass" and username == "user"):
-        url = 'http://localhost:5000/some/checkout'
-        payload = {'some': book }
-        response = requests.put(url, json=payload)
+        url = 'http://localhost:5000/' + book + '/checkout'
+        response = requests.put(url)
         
         if(response.status_code == requests.codes.ok):
             return Response(book, 200)
