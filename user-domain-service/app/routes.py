@@ -3,7 +3,7 @@ from flask import request, Response
 import requests
 
 @app.route('/')
-@app.route('/user/', methods=['GET'])
+@app.route('/user/', methods=['POST'])
 def index():
     
     username = request.args.get('username')
