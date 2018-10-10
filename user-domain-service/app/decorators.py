@@ -3,8 +3,8 @@ from flask import request, Response
 def authenticate_user (func):
     def wrapper_authenticate(*args, **kwargs):
 
-        username = request.args.get('username')
-        password = request.args.get('password')
+        username = request.form['username']
+        password = request.form['password']
         
         if (password == "s3curePass") and (username == "user"):
             return func(*args, **kwargs)
