@@ -7,8 +7,8 @@ def checkout(id):
 
     book = Book.query.get(id)
 
-    if(book):
-        bookTitle = book.title
-        return Response(f"You checked out book id: {id}, name: {bookTitle}", 200)
+    if book:
+        book_title = book.title
+        return Response(f"You checked out book id: {id}, name: {book_title}", 200)
     else:
         return Response("I wish we had that book! Try another", 404)

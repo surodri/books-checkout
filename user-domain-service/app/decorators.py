@@ -6,9 +6,8 @@ def authenticate_user (func):
         username = request.args.get('username')
         password = request.args.get('password')
         
-
-        if(password == "s3curePass" and username == "user"):
-            return func(*args, **kwards)
+        if (password == "s3curePass") and (username == "user"):
+            return func(*args, **kwargs)
         else: 
             return Response(
             'You have to login with proper credentials', 401,

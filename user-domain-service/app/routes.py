@@ -13,7 +13,7 @@ def index():
     url = f"{base_url}/{book}/checkout"
     response = requests.put(url)
         
-    if(response.status_code == requests.codes.ok):
+    if response.status_code == requests.codes.ok:
         return Response(book, 200)
     else:
         return Response("Book does not exist" , 404)
