@@ -1,9 +1,9 @@
 from app import app
 from flask import request, Response
 from app.book import Book
+from app import db
 
-@app.route('/<int:id>/checkout', methods=['PUT'])
-def checkout(id):
+def checkout_book(id):
 
     book = Book.query.get(id)
 
@@ -12,3 +12,21 @@ def checkout(id):
         return Response(f"You checked out book id: {id}, name: {book_title}", 200)
     else:
         return Response("I wish we had that book! Try another", 404)
+
+
+@app.route('/<int:id>/checkout', methods=['PUT'])
+def checkout(id):
+
+    return checkout_book(id)
+
+@app.route('/addbook', methods=['POST'])
+def add_book():
+    new_title = request.json['title']
+
+    new_book = Book( title=new_title)
+
+    db.session.add(new_book)
+    db.session.commit()
+    books = Book.query.all()
+
+    return Response(str(books), 200) 
