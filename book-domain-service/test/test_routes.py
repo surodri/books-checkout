@@ -6,6 +6,9 @@ from app import app
 from app import routes
 from app.db import init_db
 
+def root_dir():
+    return os.path.abspath(os.path.dirname(__file__))
+
 @pytest.fixture
 def client():
     db_fd, app.config['DATABASE'] = tempfile.mkstemp()
@@ -13,7 +16,10 @@ def client():
     client = app.test_client()
 
     with app.app_context():
-        init_db()
+        test_data_file_path = os.path.join(root_dir(), 'test_books_data.sql')
+        test_database_path = os.path.join(root_dir(), 'schema.db')
+
+        init_db(test_data_file_path, test_database_path)
 
     yield client
 
