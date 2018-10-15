@@ -1,5 +1,5 @@
-from app import app
 from flask import request, Response
+from flask import current_app
 from app.book import Book
 from app import db
 
@@ -14,12 +14,12 @@ def checkout_book(id):
         return Response("I wish we had that book! Try another", 404)
 
 
-@app.route('/<int:id>/checkout', methods=['PUT'])
+@current_app.route('/<int:id>/checkout', methods=['PUT'])
 def checkout(id):
 
     return checkout_book(id)
 
-@app.route('/addbook', methods=['POST'])
+@current_app.route('/addbook', methods=['POST'])
 def add_book():
     new_title = request.json['title']
 
