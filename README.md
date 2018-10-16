@@ -1,5 +1,9 @@
 
 ## Run user service 
+Add flask variable. By default flask will look for app.py
+```
+    $ export FLASK_APP=app_service.py
+```
 
 ### Local 
 ```$ cd user-domain-service
