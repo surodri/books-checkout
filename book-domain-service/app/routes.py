@@ -1,4 +1,4 @@
-from flask import request, Response
+from flask import request, Response, jsonify
 from flask import current_app
 from .book import Book
 from app import db
@@ -27,4 +27,4 @@ def add_book():
     id = new_book.id
     title = new_book.title
 
-    return Response( f"id: {id} , title: {title}", 200)
+    return jsonify(new_book.to_json()), 200

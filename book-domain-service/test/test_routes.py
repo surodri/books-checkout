@@ -13,5 +13,5 @@ def test_addbook_returns_200_given_book_exists(client, init_test_database):
 
     response = client.post('/addbook', json={ 'title': 'Test new book'})
 
-    assert b'Test new book' in  response.data
+    assert b'Test new book' in response.data
 
