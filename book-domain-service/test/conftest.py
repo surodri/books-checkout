@@ -3,7 +3,7 @@ from config_test import Config_Test
 from app import create_app, db
 from app.book import Book
 
-@pytest.fixture(scope='module')
+@pytest.fixture()
 def client():
 
     app = create_app(Config_Test)
@@ -16,16 +16,14 @@ def client():
     
     app_context.pop()
 
-@pytest.fixture(scope='module')
+@pytest.fixture()
 def init_test_database():
     db.create_all()
 
-    test_book = Book(title = "Test title BLAH")
-
+    book_title = 'Test title BLAH'
+    test_book = Book(title = book_title)
     db.session.add(test_book)
-    
     db.session.commit()
-    #import pdb; pdb.set_trace()    
     
     yield db
 
