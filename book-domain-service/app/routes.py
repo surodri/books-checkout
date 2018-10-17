@@ -19,12 +19,12 @@ def checkout(id):
 
 @checkout_blueprint.route('/addbook', methods=['POST'])
 def add_book():
-    new_title = request.json['title']
+    new_title = request.json.get('title')
 
-    new_book = Book( title=new_title)
-
+    new_book = Book.from_json(request.json)
     db.session.add(new_book)
     db.session.commit()
-    books = Book.query.all()
+    id = new_book.id
+    title = new_book.title
 
-    return Response(str(books), 200) 
+    return Response( f"id: {id} , title: {title}", 200)
