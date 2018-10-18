@@ -1,5 +1,5 @@
 import pytest
-from config_test import Config_Test
+from config import Config_Test
 from app import create_app, db
 from app.book import Book
 
