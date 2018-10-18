@@ -10,12 +10,27 @@
 
 ## User service
 
-# run locally
-```$ cd user-domain-service
-   $ pipenv run flask run -h localhost -p 8080
+Add flask variable. By default flask will look for app.py
+
+``` $ cd user-domain-service
+    $ export FLASK_APP=app_service.py
 ```
-    Access via 
-    http://localhost:8080/user/?username=user&password=s3curePass&book=Linux
+
+# run locally
+```
+    $ pipenv run flask run -h localhost -p 8080
+```
+    Access via
+```
+    $curl -X POST \
+    'http://localhost:8080/user/?book=1' \
+    -H 'content-type: application/json' \
+    -d '{
+	    "username": "user",
+	    "password": "s3curePass"
+    }'
+```
+http://localhost:8080/user/?username=user&password=s3curePass&book=Linux
 
 
 ### Docker container 
