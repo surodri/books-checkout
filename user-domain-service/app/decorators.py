@@ -6,7 +6,7 @@ def authenticate_user (func):
         username = request.form['username']
         password = request.form['password']
         
-        if (password == "s3curePass") and (username == "user"):
+        if (password == 's3curePass') and (username == 'user'):
             return func(*args, **kwargs)
         else: 
             return Response(

@@ -12,9 +12,9 @@ def checkout(id):
 
     if book:
         book_title = book.title
-        return Response(f"You checked out book id: {id}, name: {book_title}", 200)
+        return Response(f'You checked out book id: {id}, name: {book_title}', 200)
     else:
-        return Response("I wish we had that book! Try another", 404)
+        return Response('I wish we had that book! Try another', 404)
 
 @checkout_blueprint.route('/addbook', methods=['POST'])
 def add_book():
@@ -28,6 +28,6 @@ def add_book():
 
     except exc.IntegrityError:
         db.session.rollback()
-        return Response("This book already exists! Titles must be unique", 400)
+        return Response('This book already exists! Titles must be unique', 400)
 
     return jsonify(new_book.to_json()), 200

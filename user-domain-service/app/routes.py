@@ -10,10 +10,10 @@ def index():
     book = request.args.get('book')
 
     base_url = app.config['BOOKS_BASE_URL']
-    url = f"{base_url}/{book}/checkout"
+    url = f'{base_url}/{book}/checkout'
     response = requests.put(url)
         
     if response.status_code == requests.codes.ok:
         return Response(book, 200)
     else:
-        return Response("Book does not exist" , 404)
+        return Response('Book does not exist' , 404)
