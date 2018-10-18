@@ -6,3 +6,16 @@ class Book(db.Model):
 
     def __repr__(self):
         return '<Title %r>' % self.title
+
+    def from_json(title_json):
+        new_title = title_json.get('title')
+        if not new_title:
+            raise ValueError('Please provide a title')
+        return Book(title = new_title)
+
+    def to_json(self):
+        book_json = {
+            'id' : self.id,
+            'title': self.title
+            }
+        return book_json

@@ -2,14 +2,19 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
-app = Flask(__name__)
+db = SQLAlchemy()
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = 'false'
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
+def create_app(config_object=None):
+    
+    app = Flask(__name__)
+    app.config.from_object(config_object)
+    config_object.init_app(app)
 
-db.create_all()
+    db.init_app(app)
+    migrate = Migrate(app, db)
 
-from app import routes, book
+    from .routes import checkout_blueprint
+    app.register_blueprint(checkout_blueprint)
+    
 
+    return app
