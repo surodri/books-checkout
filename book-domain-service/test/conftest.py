@@ -20,7 +20,7 @@ def client():
 def init_test_database():
     db.create_all()
 
-    book_title = 'Test title BLAH'
+    book_title = 'Test book'
     test_book = Book(title = book_title)
     db.session.add(test_book)
     db.session.commit()

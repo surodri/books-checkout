@@ -22,9 +22,10 @@ def add_book():
     new_title = request.json.get('title')
 
     new_book = Book.from_json(request.json)
-    db.session.add(new_book)
-    db.session.commit()
-    id = new_book.id
-    title = new_book.title
+    try:
+        db.session.add(new_book)
+        db.session.commit()
+    except:
+        return Response("This book already exists! Titles must be unique", 400)
 
     return jsonify(new_book.to_json()), 200
