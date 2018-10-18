@@ -9,7 +9,7 @@ class Book(db.Model):
 
     def from_json(title_json):
         new_title = title_json.get('title')
-        if new_title is None or new_title=='':
+        if not new_title:
             raise ValueError('Please provide a title')
         return Book(title = new_title)
 
