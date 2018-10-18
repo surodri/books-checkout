@@ -1,8 +1,7 @@
-from flask import request, Response, jsonify
-from flask import current_app
+from flask import request, Response, jsonify, Blueprint
+from sqlalchemy import exc
 from .book import Book
 from app import db
-from flask import Blueprint
 
 checkout_blueprint = Blueprint('checkout_page', __name__)
 
@@ -25,7 +24,10 @@ def add_book():
     try:
         db.session.add(new_book)
         db.session.commit()
-    except:
+        db.session.flush()
+
+    except exc.IntegrityError:
+        db.session.rollback()
         return Response("This book already exists! Titles must be unique", 400)
 
     return jsonify(new_book.to_json()), 200
